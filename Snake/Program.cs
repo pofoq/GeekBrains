@@ -32,6 +32,10 @@ namespace Snake
 
             p2.Draw();
 
+            Point p3 = new Point(6, 9, '%');
+
+            p3.Draw();
+
             Console.ReadLine();
 
         }
