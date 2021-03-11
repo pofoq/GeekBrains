@@ -1,6 +1,8 @@
 ﻿using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Attributes;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Lesson_04
 {
@@ -8,7 +10,6 @@ namespace Lesson_04
     {
         static void Main(string[] args)
         {
-            // Task 2
             MyTree tree = new MyTree();
             tree.AddItem(50);
             tree.RemoveItem(50);
@@ -54,33 +55,25 @@ namespace Lesson_04
             Console.WriteLine($"Expected: 35");
 
             Console.ReadKey();
-            tree.PrintTree();
-
-            Console.ReadKey();
-
-            // Task 1
-            TestFinder();
-            Console.ReadKey();
-            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
-            Console.ReadKey();
-        }
-
-        static void TestFinder()
-        {
-            Finder finder = Finder.FillRandom();
-            int num = finder.arrLength / 2;
-            string toFind = finder.arrString[num];
-            Console.WriteLine($"String to find: \"{toFind}\"");
+            Console.Clear();
+            var arr = TreeHelper.GetTreeInLine(tree);
+            foreach (var a in arr)
+            {
+                Console.Write(a.Node.Value + ", ");
+            }
             Console.WriteLine();
-            Console.WriteLine(finder.FindInArray(toFind));
-            Console.WriteLine($"\tExpected True");
-            Console.WriteLine(finder.FindInHashSet(toFind));
-            Console.WriteLine($"\tExpected True");
-            Console.WriteLine(finder.FindInArray("wrong"));
-            Console.WriteLine($"\tExpected False");
-            Console.WriteLine(finder.FindInHashSet("wrong"));
-            Console.WriteLine($"\tExpected False");
+            Console.WriteLine($"Expected: 45, 25, 70, 15, 40, 65, 90, 10, 20, 35, 60, 80, 95, 33, 37");
             Console.WriteLine();
+            var res = tree.BFS(37).Value;
+            Console.WriteLine();
+            Console.WriteLine(res);
+            Console.WriteLine($"Expected: 37");
+            Console.WriteLine();
+            res = tree.DFS(33).Value;
+            Console.WriteLine();
+            Console.WriteLine(res);
+            Console.WriteLine($"Expected: 33");
+            Console.ReadKey();
         }
     }
 }

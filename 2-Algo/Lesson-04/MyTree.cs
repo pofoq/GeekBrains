@@ -10,6 +10,42 @@ namespace Lesson_04
     {
         TreeNode root;
 
+        public TreeNode BFS(int value)
+        {
+            Queue<TreeNode> nodes = new Queue<TreeNode>();
+            nodes.Enqueue(root);
+            while (nodes.Count != 0)
+            {
+                var el = nodes.Dequeue();
+                Console.WriteLine(el.Value);
+                if (el.Value == value)
+                    return el;
+                if (el.LeftChild != null)
+                    nodes.Enqueue(el.LeftChild);
+                if (el.RightChild != null)
+                    nodes.Enqueue(el.RightChild);
+            }
+            return null;
+        }
+
+        public TreeNode DFS(int value)
+        {
+            var nodes = new Stack<TreeNode>();
+            nodes.Push(root);
+            while (nodes.Count != 0)
+            {
+                var el = nodes.Pop();
+                Console.WriteLine(el.Value);
+                if (el.Value == value)
+                    return el;
+                if (el.LeftChild != null)
+                    nodes.Push(el.LeftChild);
+                if (el.RightChild != null)
+                    nodes.Push(el.RightChild);
+            }
+            return null;
+        }
+
         public void AddItem(int value)
         {
             TreeNode tempNode;
