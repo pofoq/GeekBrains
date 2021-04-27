@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace FileReader
+namespace FileReadesLibrary
 {
     public class MyFile
     {
@@ -23,7 +23,7 @@ namespace FileReader
 
         }
 
-        public bool Read()
+        public bool Read(Log log = null)
         {
             try
             {
@@ -33,13 +33,13 @@ namespace FileReader
                     foreach (string line in File.ReadAllLines(FullName))
                         Console.WriteLine(line);
                     //IsProcessed = true;
-                    Program.log.Add(this);
+                    if (log != null) log.Add(this);
                     Console.WriteLine();
                     Console.WriteLine($"Файл прочитан ({(new FileInfo(FullName)).Name})");
                     Console.WriteLine();
                     return true;
                 }
-                Program.log.Add($"Файл не найден: {FullName}");
+                if (log != null) log.Add($"Файл не найден: {FullName}");
                 return true;
             }
             catch

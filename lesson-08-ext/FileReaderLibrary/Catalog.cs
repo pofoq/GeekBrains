@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 
-namespace FileReader
+namespace FileReadesLibrary
 {
     public class Catalog
     {
@@ -72,7 +72,7 @@ namespace FileReader
             Console.CursorLeft = 0;
         }
 
-        bool IsDone(string filePath, out MyFile file)
+        bool IsDone(string filePath, out MyFile file, Log log = null)
         {
             filePath = Path.GetFullPath(filePath);
             file = null;
@@ -86,7 +86,7 @@ namespace FileReader
                 }
                 return false;
             }
-            Program.log.Add($"Файл не найден: {filePath}");
+            if (log != null) log.Add($"Файл не найден: {filePath}");
             return true;
         }
 
